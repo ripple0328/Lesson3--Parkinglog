@@ -1,0 +1,6 @@
+* ParkingLog
+** isFull?
+** emptyPosition
+** reducePosition when parking a car
+** increase a free position after fetchCar 
+
