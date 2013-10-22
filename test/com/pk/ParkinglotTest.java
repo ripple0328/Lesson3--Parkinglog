@@ -13,36 +13,36 @@ import static org.junit.Assert.assertThat;
  * Time: PM5:53
  * To change this template use File | Settings | File Templates.
  */
-public class ParkinglogTest {
+public class ParkinglotTest {
     Car car;
 
-    Parkinglog parkinglog;
+    Parkinglot parkinglot;
     ParkingTicket ticket;
 
     @Before
     public void setUp() throws Exception {
-        parkinglog = new Parkinglog(3);
+        parkinglot = new Parkinglot(3);
 
     }
 
     @Test
     public void should_the_parking_log_full_when_all_position_been_occupied() {
 
-        parkinglog.parking(car);
-        parkinglog.parking(car);
-        parkinglog.parking(car);
-        assertThat(parkinglog.isFull(), is(true));
+        parkinglot.parking(car);
+        parkinglot.parking(car);
+        parkinglot.parking(car);
+        assertThat(parkinglot.isFull(), is(true));
     }
 
     @Test
     public void should_not_full_when_have_not_parking_full() throws Exception {
-        parkinglog.parking(car);
-        assertThat(parkinglog.isFull(), is(false));
+        parkinglot.parking(car);
+        assertThat(parkinglot.isFull(), is(false));
     }
 
     @Test
     public void should_return_ticket_when_parking_car() {
-        ticket = parkinglog.parking(car);
+        ticket = parkinglot.parking(car);
         boolean result = ticket instanceof ParkingTicket;
 
         assertThat(result, is(true));
@@ -50,9 +50,16 @@ public class ParkinglogTest {
 
     @Test
     public void test_should_return_car_when_show_a_tickets() throws Exception {
-        ticket = parkinglog.parking(car);
-        Car fetched_car = parkinglog.fetchCar(ticket);
+        ticket = parkinglot.parking(car);
+        Car fetched_car = parkinglot.fetchCar(ticket);
         assertThat(car, is(fetched_car));
+
+    }
+
+    @Test
+    public void should_return_correct_usage() {
+        parkinglot.parking(car);
+        assertThat(parkinglot.getUsage(), is(1d/3d));
 
     }
 }

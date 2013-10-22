@@ -21,15 +21,11 @@ public class ParkingManagerTest {
     @Before
     public void setUp() throws Exception {
         parkingManager = new ParkingManager();
+        parkingManager.parkinglots.add(new Parkinglot(2));
+        parkingManager.parkinglots.add(new Parkinglot(3));
         car = new Car();
     }
 
-    @Test
-    public void should_have_two_parkinglog() throws Exception {
-
-        assertThat(parkingManager.getParkinglogs().size(), is(2));
-
-    }
 
     @Test
     public void should_ParkingManger_park_car_and_return_ticket() throws Exception {
@@ -45,7 +41,15 @@ public class ParkingManagerTest {
     }
 
     @Test
-    public void should_park_in_second_log_when_first_log_is_full() throws Exception {
-//          Parkinglog log = mock(Parkinglog.class);
+    public void should_park_in_least_usage_lot() throws Exception {
+        ParkingTicket ticket1 = parkingManager.park(car);
+        assertThat(parkingManager.parkinglots.get(0).getUsage(),is(1d/2d));
+        assertThat(parkingManager.parkinglots.get(1).getUsage(),is(0d/3d));
+        ParkingTicket ticket2 = parkingManager.park(car);
+        assertThat(parkingManager.parkinglots.get(0).getUsage(),is(1d/2d));
+        assertThat(parkingManager.parkinglots.get(1).getUsage(),is(1d/3d));
+        ParkingTicket ticket3 = parkingManager.park(car);
+        assertThat(parkingManager.parkinglots.get(0).getUsage(),is(1d/2d));
+        assertThat(parkingManager.parkinglots.get(1).getUsage(),is(2d/3d));
     }
 }

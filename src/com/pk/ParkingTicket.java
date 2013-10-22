@@ -1,5 +1,7 @@
 package com.pk;
 
+import java.util.HashMap;
+
 /**
  * Created with IntelliJ IDEA.
  * User: qingbo
@@ -8,6 +10,8 @@ package com.pk;
  * To change this template use File | Settings | File Templates.
  */
 public class ParkingTicket {
+    HashMap<String,Car> ticket;
+
     private Car car;
 
     public ParkingTicket(Car car) {
